@@ -87,6 +87,7 @@ window.addEventListener("load", function () {
 					this.mouse.y = event.touches.item(0).clientY;
 				});
 			} else {
+				alert("touch is off");
 				window.addEventListener("mousemove", (event) => {
 					this.mouse.x = event.x;
 					this.mouse.y = event.y;
