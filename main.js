@@ -7,17 +7,11 @@ window.addEventListener("load", function () {
 	const fullScreenImg = document.getElementById("full-screen-toggle");
 	fullScreenImg.active = false;
 	fullScreenImg.addEventListener("click", () => {
-		if (fullScreenImg.active) {
-			document.exitFullscreen();
-			fullScreenImg.src = "./full-screen.svg";
-		} else {
-			try {
-				canvas.requestFullscreen();
-			} catch (e) {
-				console.log(e);
-				this.alert("full screen mode failed");
-			}
-			fullScreenImg.src = "./exit-full-screen.svg";
+		try {
+			canvas.requestFullscreen();
+		} catch (e) {
+			console.log(e);
+			this.alert("full screen mode failed");
 		}
 	});
 
@@ -80,14 +74,12 @@ window.addEventListener("load", function () {
 				y: null,
 			};
 			if (touchOn) {
-				alert("touch is on ");
 				fullScreenImg.style.display = "block";
 				window.addEventListener("touchmove", (event) => {
 					this.mouse.x = event.touches.item(0).clientX;
 					this.mouse.y = event.touches.item(0).clientY;
 				});
 			} else {
-				alert("touch is off");
 				window.addEventListener("mousemove", (event) => {
 					this.mouse.x = event.x;
 					this.mouse.y = event.y;
