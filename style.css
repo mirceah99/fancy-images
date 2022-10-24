@@ -20,3 +20,10 @@ img {
 	justify-content: center;
 	flex-direction: column;
 }
+#full-screen-toggle {
+	z-index: 2;
+	position: absolute;
+	top: 12px;
+	right: 12px;
+	height: 24px;
+}

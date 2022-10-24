@@ -2,7 +2,27 @@ window.addEventListener("load", function () {
 	const canvas = document.getElementById("main-canvas");
 	canvas.width = Math.floor(canvas.offsetWidth);
 	canvas.height = Math.floor(canvas.offsetHeight);
+
+	//full screen feature
+	const fullScreenImg = document.getElementById("full-screen-toggle");
+	fullScreenImg.active = false;
+	fullScreenImg.addEventListener("click", () => {
+		if (fullScreenImg.active) {
+			document.exitFullscreen();
+			fullScreenImg.src = "./full-screen.svg";
+		} else {
+			try {
+				canvas.requestFullscreen();
+			} catch (e) {
+				console.log(e);
+				this.alert("full screen mode failed");
+			}
+			fullScreenImg.src = "./exit-full-screen.svg";
+		}
+	});
+
 	const ctx = canvas.getContext("2d");
+
 	const image = this.document.getElementById("sample-img");
 	class Particle {
 		constructor(effect, x, y, color) {
@@ -60,6 +80,7 @@ window.addEventListener("load", function () {
 				y: null,
 			};
 			if (touchOn) {
+				fullScreenImg.style.display = "block";
 				window.addEventListener("touchmove", (event) => {
 					this.mouse.x = event.touches.item(0).clientX;
 					this.mouse.y = event.touches.item(0).clientY;
@@ -120,7 +141,6 @@ window.addEventListener("load", function () {
 		"ontouchstart" in window ||
 		navigator.maxTouchPoints > 0 ||
 		navigator.msMaxTouchPoints > 0;
-
 	const effect = new Effect(canvas.width, canvas.height, image, ctx, touchOn);
 	effect.init();
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
