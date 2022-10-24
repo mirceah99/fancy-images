@@ -80,6 +80,7 @@ window.addEventListener("load", function () {
 				y: null,
 			};
 			if (touchOn) {
+				alert("touch is on ");
 				fullScreenImg.style.display = "block";
 				window.addEventListener("touchmove", (event) => {
 					this.mouse.x = event.touches.item(0).clientX;
