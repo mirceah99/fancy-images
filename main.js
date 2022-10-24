@@ -61,7 +61,6 @@ window.addEventListener("load", function () {
 			};
 			if (touchOn) {
 				window.addEventListener("touchmove", (event) => {
-					console.log(event);
 					this.mouse.x = event.touches.item(0).clientX;
 					this.mouse.y = event.touches.item(0).clientY;
 				});
