@@ -59,10 +59,18 @@ window.addEventListener("load", function () {
 				x: null,
 				y: null,
 			};
-			window.addEventListener("mousemove", (event) => {
-				this.mouse.x = event.x;
-				this.mouse.y = event.y;
-			});
+			if (touchOn) {
+				window.addEventListener("touchmove", (event) => {
+					console.log(event);
+					this.mouse.x = event.touches.item(0).clientX;
+					this.mouse.y = event.touches.item(0).clientY;
+				});
+			} else {
+				window.addEventListener("mousemove", (event) => {
+					this.mouse.x = event.x;
+					this.mouse.y = event.y;
+				});
+			}
 		}
 		init() {
 			const pixels = ctx.getImageData(0, 0, this.width, this.height).data;
@@ -109,7 +117,12 @@ window.addEventListener("load", function () {
 			);
 		}
 	}
-	const effect = new Effect(canvas.width, canvas.height, image, ctx);
+	const touchOn =
+		"ontouchstart" in window ||
+		navigator.maxTouchPoints > 0 ||
+		navigator.msMaxTouchPoints > 0;
+
+	const effect = new Effect(canvas.width, canvas.height, image, ctx, touchOn);
 	effect.init();
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	effect.draw();
